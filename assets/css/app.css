@@ -1,0 +1,67 @@
+html,body {
+    height:100%;
+    width:100%;
+    margin:0px;
+    padding:0px;
+    background-color: #ffe;
+}
+h1,p {
+    text-align: center;   
+}
+.thumbnails {
+    list-style-type: none;
+}
+.thumbnails li.thumbnail {
+    float: left;
+    margin: 10px;
+    position: relative;
+    overflow: hidden;
+  -moz-box-shadow:    1px 1px 5px 3px #333;
+  -webkit-box-shadow: 1px 1px 5px 3px #333;
+  box-shadow:         1px 1px 5px 3px #333;
+    z-index: 9;
+}
+li.thumbnail > img {
+    z-index: -1;
+}
+li.thumbnail > header, li.thumbnail > footer {
+    position: absolute;
+    background-color: #666;
+    width: 100%;
+    color: #efefef;
+    text-align: center;
+    padding: 6px 0px;
+}
+li.thumbnail > header {
+    top: 0px;
+    opacity: 0.9;
+}
+li.thumbnail > footer {
+    bottom: 0px;
+    opacity: 0.7;
+}
+.loading-message {
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    background-color: #000;
+    color: #fff;
+    opacity: 0.6;
+    padding: 3px;
+    z-index: 99999;
+}
+#spinner {
+    position: absolute;
+    height: 64px;
+    width: 64px;   
+}
+#modal {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px; 
+    background-color: #000;
+    opacity: 0.8;
+    z-index: 99;
+}

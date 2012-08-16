@@ -1,6 +1,10 @@
 var container = document.getElementById('gallery'),
     spinner = document.getElementById('spinner'),
-    total = images.length;
+    total = images.length,
+    dim = {
+        height: 240,
+        width: 320
+    };
 
 function fade_in(el, callback) {
     if (el.style.opacity && el.style.opacity <= 1) {
@@ -22,13 +26,6 @@ function fade_out(el) {
     }
 }
 
-function apply_center_style(el) {
-    el.style.position = "absolute";
-    el.style.top = window.offset
-}
-function remove_center_style(el) {
-    el.style.position = "auto";
-}
 function shrink_and_position(el, dimensions) {
     while (el.offsetHeight > dimensions.height / 0.99 && el.offsetWidth > dimensions.width / 0.99) {
         el.style.height = el.offsetHeight * 0.99 + "px";
@@ -72,13 +69,21 @@ function click_handler(e) {
     el.style.width = "320px";
     el.style.zIndex = 9;
     el.id = "";
-    
     shrink_and_position(el.getElementsByTagName('img')[0], {
         height: 240,
         width: 320
     });
+    //size_li_element(el, dim);
     document.getElementById('modal').hidden = true;
     document.removeEventListener('click', click_handler, true);
+}
+
+function size_li_element(el, dimensions) {
+    el.style.height = dimensions.height + "px";
+    el.style.width = dimensions.width + "px";
+    el.style.position = "relative";
+    el.style.top = "";
+    el.style.left = "";
 }
 
 function load_images() {
@@ -88,13 +93,8 @@ function load_images() {
     }
     var info = images.shift(),
         li = document.createElement('li'),
-        image = document.createElement('img'),
-        dim = {
-            height: 240,
-            width: 320
-        };
-    li.style.height = dim.height + "px";
-    li.style.width = dim.width + "px";
+        image = document.createElement('img');
+    size_li_element(li, dim);
     li.className = 'thumbnail';
     li.style.opacity = 0;
     container.appendChild(li);
@@ -123,11 +123,16 @@ function load_images() {
         this.style.width = "600px";
         this.id = "active-image";
         this.style.zIndex = 999;
-        grow_and_position(this.getElementsByTagName('img')[0], {
+        var modal = document.getElementById('modal'),
+            img = this.getElementsByTagName('img')[0];
+        grow_and_position(img, {
             height: 400,
             width: 600
         });
-        document.getElementById('modal').hidden = false;
+        // recenter the li
+        modal.hidden = false;
+        //this.style.top = /*screen.innerHeight / 2 - */ 175 + "px";
+        //this.style.left = window.innerWidth / 2 - 300 + "px";
         document.addEventListener('click', click_handler, true);
     };
     image.onload = function() {
